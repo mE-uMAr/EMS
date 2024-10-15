@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <title>EMS-User</title>
+    <link rel="stylesheet" href="{% static "styles.css" %}"/>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
+    />
+    <link rel="stylesheet" href="{% static "tasks.css" %}" />
+  </head>
+  <body id="body">
+    <div style="display: none" id="nav">
+      <nav>
+        <a href="/">Dashboard</a>
+        <a href="/payments">Payments</a>
+        <a href="/tasks">Tasks</a>
+        <a href="/profile">Profile details</a>
+      </nav>
+    </div>
+    <header>
+      <div class="username">
+        <img src="{% static "profile.jpg" %}" alt="" />
+        <h3>{{profile.username}}</h3>
+      </div>
+      <div class="profile">
+        <i id="bars" class="fa-solid fa-bars"></i>
+        <i id="mode-button" class="fa-solid fa-toggle-on"></i>
+      </div>
+    </header>
+    <h2 style="margin: 0 0 -3vw 6vw">Pending tasks:</h2>
+    {% for task in pendingTask %}
+    <div class="pending">
+      <h3>{{task.taskName}}</h3>
+      <a style="font-size: 3vw; margin-left: 0" href="#"
+        >Lern more about this task ></a
+      >
+      <p>{{task.taskDisc | truncatechars:50}}</p>
+      <br />
+      <p style="font-size: 3vw; color: blue">Dead line: {{task.deadline}}</p>
+      <button>Submit Task</button>
+    </div>
+    {% endfor %}
+    <h2 style="margin: 0 0 -3vw 6vw">Submitted Tasks:</h2>
+    {% for task in submittedTask %}
+    
+    <div class="submitted">
+      <h3>{{task.taskName}}</h3>
+      <br />
+      <p>Tasks Submitted successfully!</p>
+      <br />
+      <p style="font-size: 3vw; color: blue">
+        Submission time: {{task.deadline}}
+      </p>
+      <button>Submitted!</button>
+    </div>
+    {% endfor %}
+
+    <script src="{% static "script.js" %}"></script>
+  </body>
+</html>

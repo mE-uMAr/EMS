@@ -1,0 +1,28 @@
+body>button{
+    background-image: linear-gradient(to left,#61c1f8fb, blue ,#61c1f8fb);
+    border: none;
+    border-radius: 5px;
+    height: 5vw;
+    width: 15vw;
+    color: white;
+    font-size: 2vw;
+    margin-left: 45vw;
+}
+.user-details{
+    display: flex;
+    justify-content: space-ev;
+    gap: 10vw;
+    width: 90%;
+    height: auto;
+    padding: 3vw;
+    margin-left: 5%;
+}
+.user-details>span{
+    font-size: 3vw;
+}
+.employment{
+    width: 90%;
+    height: auto;
+    padding: 3vw;
+    margin-left: 5%;
+}

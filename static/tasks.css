@@ -1,0 +1,34 @@
+.pending{
+    width: 85%;
+    height: auto;
+    padding: 3vw;
+    background-color: #fa7030;
+    margin: 5vw 6%;
+    border-radius: 3vw;
+}
+.pending button{
+    background-image: linear-gradient(to left,#61c1f8fb, blue ,#61c1f8fb);
+    border: none;
+    border-radius: 5px;
+    height: 4vw;
+    width: 25vw;
+    color: white;
+    font-size: 2vw;
+}
+.submitted{
+    width: 85%;
+    height: auto;
+    padding: 3vw;
+    background-color: rgb(6, 209, 33);
+    margin: 5vw 6%;
+    border-radius: 3vw;
+}
+.submitted button{
+    background-image: linear-gradient(to left,#61c1f8fb, blue ,#61c1f8fb);
+    border: none;
+    border-radius: 5px;
+    height: 4vw;
+    width: 25vw;
+    color: white;
+    font-size: 2vw;
+}

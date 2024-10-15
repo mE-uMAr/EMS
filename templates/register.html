@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
+    />
+    <title>log in</title>
+    <style>
+      body {
+        background-color: #242020;
+        color: #fff;
+        font-family: "Nunito Sans";
+      }
+      h2 {
+        background-color: #f83535;
+        width: 40%;
+        margin: 0 30%;
+        height: auto;
+        padding: 3vw;
+        border-radius: 2vw;
+      }
+      form {
+        background-color: #f83535;
+        width: 80%;
+        height: auto;
+        padding: 2vw;
+        border-radius: 2vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 10%;
+      }
+      form > label {
+        margin: 1vw 10%;
+      }
+      form > input {
+        border: none;
+        height: 7vw;
+        width: 80%;
+        margin: 1vw 10%;
+        border-radius: 2vw;
+      }
+      form > input:active {
+        border: none;
+      }
+      form > button {
+        width: 20%;
+        height: 7vw;
+        border: none;
+        margin-top: 3vw;
+        margin-left: 40%;
+        background-image: linear-gradient(to left, #61c1f8fb, blue, #61c1f8fb);
+        border-radius: 2vw;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login">
+      <h2>Log In to EMS</h2>
+      <br />
+
+      <form action="/signup/" method="post">
+        {% csrf_token %}
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter Username"
+          required
+        />
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="enter your Email"
+          required
+        />
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter Password"
+          required
+        />
+        <label for="re-password">Enter Password Again</label>
+        <input
+          type="password"
+          id="re-password"
+          name="re-password"
+          placeholder="Retype password"
+          required
+        />
+
+        <button type="submit">Sign up</button>
+      </form>
+    </div>
+  </body>
+</html>

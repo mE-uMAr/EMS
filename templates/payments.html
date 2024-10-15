@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {%load static%}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <title>Payments</title>
+    <link rel="stylesheet" href="{% static "styles.css" %} " />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
+    />
+    <link rel="stylesheet" href="{% static "payments.css" %}" />
+  </head>
+  <body id="body">
+    <div style="display: none" id="nav">
+      <nav>
+        <a href="/">Dashboard</a>
+        <a href="/payments">Payments</a>
+        <a href="/tasks">Tasks</a>
+        <a href="/profile">Profile details</a>
+      </nav>
+    </div>
+
+    <header>
+      <div class="username">
+        <img src="{%static "profile.jpg"%}" alt="" />
+        <h3>{{profile.username}}</h3>
+      </div>
+      <div class="profile">
+        <i id="bars" class="fa-solid fa-bars"></i>
+        <i id="mode-button" class="fa-solid fa-toggle-on"></i>
+      </div>
+    </header>
+    <div class="salary">
+      <div>
+        <h4>Total Salary</h4>
+        <p>$ {{salary}}</p>
+        <button class="witButton">Withdraw</button>
+      </div>
+      <div class="card">
+        <i
+          style="margin-left: 1em; margin-top: 1rem"
+          class="fa-brands fa-cc-mastercard"
+        ></i>
+        <p>** 7854</p>
+      </div>
+    </div>
+    <h3 style="margin: 0 0 -3vw 5vw">Slary Details</h3>
+    <div class="payment-details">
+      <div>
+        <h5>Basic pay:</h5>
+        <p>$ {{account.basic}}</p>
+      </div>
+      <div>
+        <h5>Bonuses:</h5>
+        <p>$ {{account.bonus}}</p>
+      </div>
+      <div>
+        <h5>Other Rewards:</h5>
+        <p>$ {{account.reward}}</p>
+      </div>
+    </div>
+    <div class="history">
+      <h3>History:</h3>
+      <p>
+        withdrawn to bank: $ 60,000 <br />withdrawn to bank: $ 233,000
+        <br />withdrawn to bank: $ 60,000 <br />withdrawn to bank: $ 233,000
+        <br />withdrawn to bank: $ 60,000 <br />withdrawn to bank: $ 233,000
+      </p>
+    </div>
+
+    <script src="{% static "script.js" %}"></script>
+  </body>
+</html>

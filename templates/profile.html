@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static%}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EMS-User</title>
+    <link rel="stylesheet" href="{% static "styles.css" %}">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
+    />
+    <link rel="stylesheet" href="{% static "profile.css" %}" />
+  </head>
+  <body id="body">
+    <div style="display: none" id="nav">
+      <nav>
+        <a href="/">Dashboard</a>
+        <a href="/payments">Payments</a>
+        <a href="/tasks">Tasks</a>
+        <a href="/profile">Profile details</a>
+      </nav>
+    </div>
+    <header>
+      <div class="username">
+        <img src="{% static "profile.jpg" %}" alt="" />
+        <h3>{{profile.username}}</h3>
+      </div>
+      <div class="profile">
+        <i id="bars" class="fa-solid fa-bars"></i>
+        <i id="mode-button" class="fa-solid fa-toggle-on"></i>
+      </div>
+    </header>
+    <hero>
+      <div class="hero-details">
+        <p>Total Salary</p>
+        <h1>$ {{salary}}</h1>
+        <button>Pending</button>
+        <span style="cursor: pointer"
+          ><a href="/payments"> Go to payments ></a></span
+        >
+      </div>
+      <div class="card">
+        <i
+          style="margin-left: 1em; margin-top: 1rem"
+          class="fa-brands fa-cc-mastercard"
+        ></i>
+        <p>** 7854</p>
+      </div>
+    </hero>
+    <div>
+      <h2 style="margin: 5vw 0 0 5vw">Hi Mr.{{profile.username}}!</h2>
+      <h3 style="margin: 5vw 0 0 8vw">Personal Details:</h3>
+      <div class="user-details">
+        <span>
+          <p>{{profile.username}}</p>
+          <p>Cnic: {{profile.cnic}}</p>
+        </span>
+        <span>
+          <p>Email: {{profile.email}}</p>
+          <p>contact: +92{{profile.contact}}</p>
+        </span>
+      </div>
+      <div class="employment">
+        <h3>Employment Status:</h3>
+        <br />
+        <span>
+          <h4>{{profile.employPost}}</h4>
+          <p style="color: blue; font-size: 3vw">
+            Employ since : {{profile.employDate}}
+          </p>
+        </span>
+      </div>
+    </div>
+    <button><a href="/logout/" style="text-decoration:none;color:white;">Log Out</a></button>
+    <script src="{% static "script.js" %}"></script>
+  </body>
+</html>
