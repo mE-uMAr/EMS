@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% load static %}
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -15,100 +14,104 @@
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap"
     />
-    <title>log in</title>
-    <style>
-      body {
-        background-color: #242020;
-        color: #fff;
-        font-family: "Nunito Sans";
-      }
-      h2 {
-        background-color: #f83535;
-        width: 40%;
-        margin: 0 30%;
-        height: auto;
-        padding: 3vw;
-        border-radius: 2vw;
-      }
-      form {
-        background-color: #f83535;
-        width: 80%;
-        height: auto;
-        padding: 2vw;
-        border-radius: 2vw;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin: 0 10%;
-      }
-      form > label {
-        margin: 1vw 10%;
-      }
-      form > input {
-        border: none;
-        height: 7vw;
-        width: 80%;
-        margin: 1vw 10%;
-        border-radius: 2vw;
-      }
-      form > input:active {
-        border: none;
-      }
-      form > button {
-        width: 20%;
-        height: 7vw;
-        border: none;
-        margin-top: 3vw;
-        margin-left: 40%;
-        background-image: linear-gradient(to left, #61c1f8fb, blue, #61c1f8fb);
-        border-radius: 2vw;
-      }
-    </style>
+    <title>EMS - Sign Up</title>
   </head>
   <body>
-    <div class="login">
-      <h2>Log In to EMS</h2>
-      <br />
+    <div class="auth-container">
+      <div class="auth-card">
+        <div class="auth-header">
+          <h1>Create Account</h1>
+          <p>Sign up for your EMS account</p>
+        </div>
+        
+        <form action="/signup/" method="post" class="auth-form">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="username">Username</label>
+            <div class="input-with-icon">
+              <i class="fa-solid fa-user"></i>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Choose a username"
+                required
+              />
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email</label>
+            <div class="input-with-icon">
+              <i class="fa-solid fa-envelope"></i>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-with-icon">
+              <i class="fa-solid fa-lock"></i>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Create a password"
+                required
+              />
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="re-password">Confirm Password</label>
+            <div class="input-with-icon">
+              <i class="fa-solid fa-lock"></i>
+              <input
+                type="password"
+                id="re-password"
+                name="re-password"
+                placeholder="Confirm your password"
+                required
+              />
+            </div>
+          </div>
 
-      <form action="/signup/" method="post">
-        {% csrf_token %}
-        <label for="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          placeholder="Enter Username"
-          required
-        />
-        <label for="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="enter your Email"
-          required
-        />
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Enter Password"
-          required
-        />
-        <label for="re-password">Enter Password Again</label>
-        <input
-          type="password"
-          id="re-password"
-          name="re-password"
-          placeholder="Retype password"
-          required
-        />
-
-        <button type="submit">Sign up</button>
-      </form>
+          <div class="form-group">
+            <label for="code">Enter Job code</label>
+            <div class="input-with-icon">
+              <i class="fa-solid fa-lock"></i>
+              <input
+                type="text"
+                id="code"
+                name="code"
+                placeholder="Enter Job code given by our recruiter"
+                required
+              />
+            </div>
+          </div>
+          
+          <div class="form-footer">
+            <div class="terms">
+              <input type="checkbox" id="terms" name="terms" required>
+              <label for="terms">I agree to the <a href="#">Terms & Conditions</a></label>
+            </div>
+          </div>
+          
+          <button type="submit" class="btn-primary">Create Account</button>
+          
+          <div class="auth-redirect">
+            <p>Already have an account? <a href="/login">Log In</a></p>
+          </div>
+        </form>
+      </div>
     </div>
   </body>
 </html>

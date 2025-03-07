@@ -1,12 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class AddEmployee(models.Model):
+    code = models.CharField(max_length=10)
+    post = models.CharField(max_length=40)
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    username = models.CharField(max_length=50)
-    cnic = models.CharField(max_length=20)
-    email = models.CharField(max_length=150)
-    contact = models.CharField(max_length=13)
     employPost = models.CharField(max_length=40)
     employDate = models.DateTimeField()
 

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {% load static%}
+    {% load static %}
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EMS-User</title>
-    <link rel="stylesheet" href="{% static "styles.css" %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <title>EMS - Profile</title>
+    <link rel="stylesheet" href="{% static 'profile.css' %}" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -15,71 +15,173 @@
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap"
     />
-    <link rel="stylesheet" href="{% static "profile.css" %}" />
   </head>
   <body id="body">
-    <div style="display: none" id="nav">
-      <nav>
-        <a href="/">Dashboard</a>
-        <a href="/payments">Payments</a>
-        <a href="/tasks">Tasks</a>
-        <a href="/profile">Profile details</a>
-      </nav>
+    <div class="app-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <h2>EMS</h2>
+          <button class="close-sidebar" id="close-sidebar">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="sidebar-user">
+          <img src="{% static 'profile.jpg' %}" alt="Profile" class="avatar" />
+          <div class="user-info">
+            <h3>{{profile.username}}</h3>
+            <span class="user-role">Employee</span>
+          </div>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="/" class="nav-item">
+            <i class="fa-solid fa-gauge-high"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="/tasks" class="nav-item">
+            <i class="fa-solid fa-list-check"></i>
+            <span>Tasks</span>
+          </a>
+          <a href="/payments" class="nav-item">
+            <i class="fa-solid fa-credit-card"></i>
+            <span>Payments</span>
+          </a>
+          <a href="/profile" class="nav-item active">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+          </a>
+        </nav>
+        <div class="sidebar-footer">
+          <a href="/logout" class="nav-item">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <header class="top-header">
+          <button class="menu-toggle" id="menu-toggle">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="header-actions">
+            <button class="theme-toggle" id="theme-toggle">
+              <i class="fa-solid fa-moon"></i>
+            </button>
+            <div class="notifications-dropdown">
+              <button class="notifications-btn">
+                <i class="fa-solid fa-bell"></i>
+                <span class="badge">2</span>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <div class="profile-container">
+          <h1 class="page-title">Profile Details</h1>
+          
+          <!-- Salary Card -->
+          <div class="card-container">
+            <div class="salary-card">
+              <div class="salary-info">
+                <span class="label">Total Salary</span>
+                <h2 class="amount">${{salary}}</h2>
+                <div class="salary-actions">
+                  <span class="status pending">Pending</span>
+                  <a href="/payments" class="link-action">
+                    Go to payments <i class="fa-solid fa-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="card-visual">
+                <i class="fa-brands fa-cc-mastercard"></i>
+                <span class="card-number">**** 7854</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Personal Details Section -->
+          <section class="profile-section">
+            <div class="section-header">
+              <h2>Hi Mr. {{profile.username}}!</h2>
+            </div>
+            
+            <div class="profile-card">
+              <h3 class="profile-section-title">Personal Details</h3>
+              <div class="profile-details">
+                <div class="detail-group">
+                  <div class="detail-item">
+                    <span class="detail-label">Username</span>
+                    <span class="detail-value">{{username}}</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-label">Post</span>
+                    <span class="detail-value">{{profile.employPost}}</span>
+                  </div>
+                </div>
+                <div class="detail-group">
+                  <div class="detail-item">
+                    <span class="detail-label">Email</span>
+                    <span class="detail-value">{{email}}</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-label">Contact</span>
+                    <span class="detail-value">+92 3123456789</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          <!-- Employment Status Section -->
+          <section class="profile-section">
+            <div class="profile-card">
+              <h3 class="profile-section-title">Employment Status</h3>
+              <div class="employment-details">
+                <div class="employment-position">
+                  <span class="position-title">{{profile.employPost}}</span>
+                  <span class="employment-date">Employed since: {{profile.employDate}}</span>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          <!-- Logout Button -->
+          <div class="logout-container">
+            <a href="/logout/" class="logout-button">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              Log Out
+            </a>
+          </div>
+        </div>
+      </main>
     </div>
-    <header>
-      <div class="username">
-        <img src="{% static "profile.jpg" %}" alt="" />
-        <h3>{{profile.username}}</h3>
-      </div>
-      <div class="profile">
-        <i id="bars" class="fa-solid fa-bars"></i>
-        <i id="mode-button" class="fa-solid fa-toggle-on"></i>
-      </div>
-    </header>
-    <hero>
-      <div class="hero-details">
-        <p>Total Salary</p>
-        <h1>$ {{salary}}</h1>
-        <button>Pending</button>
-        <span style="cursor: pointer"
-          ><a href="/payments"> Go to payments ></a></span
-        >
-      </div>
-      <div class="card">
-        <i
-          style="margin-left: 1em; margin-top: 1rem"
-          class="fa-brands fa-cc-mastercard"
-        ></i>
-        <p>** 7854</p>
-      </div>
-    </hero>
-    <div>
-      <h2 style="margin: 5vw 0 0 5vw">Hi Mr.{{profile.username}}!</h2>
-      <h3 style="margin: 5vw 0 0 8vw">Personal Details:</h3>
-      <div class="user-details">
-        <span>
-          <p>{{profile.username}}</p>
-          <p>Cnic: {{profile.cnic}}</p>
-        </span>
-        <span>
-          <p>Email: {{profile.email}}</p>
-          <p>contact: +92{{profile.contact}}</p>
-        </span>
-      </div>
-      <div class="employment">
-        <h3>Employment Status:</h3>
-        <br />
-        <span>
-          <h4>{{profile.employPost}}</h4>
-          <p style="color: blue; font-size: 3vw">
-            Employ since : {{profile.employDate}}
-          </p>
-        </span>
-      </div>
-    </div>
-    <button><a href="/logout/" style="text-decoration:none;color:white;">Log Out</a></button>
-    <script src="{% static "script.js" %}"></script>
+
+    <script>
+      // Simple toggle functionality for sidebar
+      document.getElementById('menu-toggle').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.add('active');
+      });
+      
+      document.getElementById('close-sidebar').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.remove('active');
+      });
+      
+      // Theme toggle
+      document.getElementById('theme-toggle').addEventListener('click', function() {
+        document.body.classList.toggle('light-mode');
+        const icon = this.querySelector('i');
+        if (document.body.classList.contains('light-mode')) {
+          icon.classList.remove('fa-moon');
+          icon.classList.add('fa-sun');
+        } else {
+          icon.classList.remove('fa-sun');
+          icon.classList.add('fa-moon');
+        }
+      });
+    </script>
   </body>
 </html>

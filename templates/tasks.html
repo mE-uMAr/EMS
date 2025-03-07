@@ -4,8 +4,8 @@
     {% load static %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
-    <title>EMS-User</title>
-    <link rel="stylesheet" href="{% static "styles.css" %}"/>
+    <title>EMS - Tasks</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}"/>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -13,59 +13,84 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
-    />
-    <link rel="stylesheet" href="{% static "tasks.css" %}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"/>
   </head>
   <body id="body">
-    <div style="display: none" id="nav">
-      <nav>
-        <a href="/">Dashboard</a>
-        <a href="/payments">Payments</a>
-        <a href="/tasks">Tasks</a>
-        <a href="/profile">Profile details</a>
-      </nav>
+    <div class="app-container">
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <h2>EMS</h2>
+          <button class="close-sidebar" id="close-sidebar">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="sidebar-user">
+          <img src="{% static 'profile.jpg' %}" alt="Profile" class="avatar" />
+          <div class="user-info">
+            <h3>{{profile.username}}</h3>
+            <span class="user-role">Employee</span>
+          </div>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="/" class="nav-item"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+          <a href="/tasks" class="nav-item active"><i class="fa-solid fa-list-check"></i><span>Tasks</span></a>
+          <a href="/payments" class="nav-item"><i class="fa-solid fa-credit-card"></i><span>Payments</span></a>
+          <a href="/profile" class="nav-item"><i class="fa-solid fa-user"></i><span>Profile</span></a>
+        </nav>
+        <div class="sidebar-footer">
+          <a href="/logout" class="nav-item"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+        </div>
+      </aside>
+      
+      <!-- Main Content -->
+      <main class="main-content">
+        <header class="top-header">
+          <button class="menu-toggle" id="menu-toggle">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </header>
+        <div class="dashboard">
+          <h1 class="page-title">Tasks</h1>
+          
+          <section class="task-section">
+            <div class="section-header">
+              <h2>Pending Tasks</h2>
+            </div>
+            {% for task in pendingTask %}
+            <div class="progress-card">
+              <h3>{{task.taskName}}</h3>
+              <p>{{task.taskDisc | truncatechars:50}}</p>
+              <p class="progress-info">Deadline: <span class="text-danger">{{task.deadline}}</span></p>
+              <button class="btn-primary">Submit Task</button>
+            </div>
+            {% endfor %}
+          </section>
+          
+          <section class="task-section">
+            <div class="section-header">
+              <h2>Submitted Tasks</h2>
+            </div>
+            {% for task in submittedTask %}
+            <div class="progress-card">
+              <h3>{{task.taskName}}</h3>
+              <p>Task Submitted Successfully!</p>
+              <p class="progress-info">Submission Time: {{task.deadline}}</p>
+              <button class="btn-primary" disabled>Submitted</button>
+            </div>
+            {% endfor %}
+          </section>
+        </div>
+      </main>
     </div>
-    <header>
-      <div class="username">
-        <img src="{% static "profile.jpg" %}" alt="" />
-        <h3>{{profile.username}}</h3>
-      </div>
-      <div class="profile">
-        <i id="bars" class="fa-solid fa-bars"></i>
-        <i id="mode-button" class="fa-solid fa-toggle-on"></i>
-      </div>
-    </header>
-    <h2 style="margin: 0 0 -3vw 6vw">Pending tasks:</h2>
-    {% for task in pendingTask %}
-    <div class="pending">
-      <h3>{{task.taskName}}</h3>
-      <a style="font-size: 3vw; margin-left: 0" href="#"
-        >Lern more about this task ></a
-      >
-      <p>{{task.taskDisc | truncatechars:50}}</p>
-      <br />
-      <p style="font-size: 3vw; color: blue">Dead line: {{task.deadline}}</p>
-      <button>Submit Task</button>
-    </div>
-    {% endfor %}
-    <h2 style="margin: 0 0 -3vw 6vw">Submitted Tasks:</h2>
-    {% for task in submittedTask %}
     
-    <div class="submitted">
-      <h3>{{task.taskName}}</h3>
-      <br />
-      <p>Tasks Submitted successfully!</p>
-      <br />
-      <p style="font-size: 3vw; color: blue">
-        Submission time: {{task.deadline}}
-      </p>
-      <button>Submitted!</button>
-    </div>
-    {% endfor %}
-
-    <script src="{% static "script.js" %}"></script>
+    <script>
+      document.getElementById('menu-toggle').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.add('active');
+      });
+      document.getElementById('close-sidebar').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.remove('active');
+      });
+    </script>
   </body>
 </html>

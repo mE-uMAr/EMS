@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login,logout,authenticate
-from .models import Profile,Tasks,Accounts
+from .models import *
 
 
 def register(request):
@@ -12,10 +12,59 @@ def register(request):
         email = request.POST['email']
         password = request.POST['password']
         confPassword = request.POST['re-password']
+        code = request.POST['code']
+        addemp = AddEmployee.objects.filter(code=code).first()
+        if addemp is None:
+            return HttpResponse('''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Denied</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8d7da;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .error-container {
+            background: #721c24;
+            color: #f8d7da;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+        }
+        .error-icon {
+            font-size: 50px;
+            color: #f8d7da;
+        }
+        .error-message {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-icon">&#9888;</div>
+        <h2>Access Denied</h2>
+        <p class="error-message">We detected that you are not an employee of our company or not recommended by our recruiter.<br>
+        Please contact our HR department for more information.</p>
+    </div>
+</body>
+</html>''')
         if password != confPassword :
             return redirect ("/signup")
         newUser = User.objects.create_user(username , email , password)
         newUser.save()
+        account = Accounts(user=newUser, basic=0, bonus=0, reward=0)
+        profile = Profile(user=newUser, employPost=addemp.post, employDate='2021-01-01')
         messages.success(request , "new account created!")
         return redirect('/')
     
@@ -46,11 +95,12 @@ def home(request):
     submittedTask = Tasks.objects.filter(user=request.user, status='submitted').count()
     profile = Profile.objects.filter(user=request.user).first()
     profile = Profile.objects.filter(user=request.user).first()
-    percentage = (pendingTask/tasks)*100
     try:
+        percentage = (pendingTask/tasks)*100
         account = Accounts.objects.filter(user = request.user).first()
         salary = account.salary()
     except:
+        percentage = 0
         account = Accounts.objects.filter(user = request.user).first()
         salary = None
     param = {
@@ -94,6 +144,8 @@ def tasks(request):
 @login_required
 def profile(request):
     profile = Profile.objects.filter(user=request.user).first()
+    email = request.user.email
+    username = request.user.username
     try:
         account = Accounts.objects.filter(user = request.user).first()
         salary = account.salary()
@@ -101,6 +153,8 @@ def profile(request):
         account = Accounts.objects.filter(user = request.user).first()
         salary = None
     param = {
+        'email' : email,
+        'username' : username,
         'account' : account ,
         'salary' : salary,
         'profile' : profile

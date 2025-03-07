@@ -1,28 +1,507 @@
-body>button{
-    background-image: linear-gradient(to left,#61c1f8fb, blue ,#61c1f8fb);
-    border: none;
-    border-radius: 5px;
-    height: 5vw;
-    width: 15vw;
-    color: white;
-    font-size: 2vw;
-    margin-left: 45vw;
-}
-.user-details{
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Nunito Sans", sans-serif;
+  }
+  
+  :root {
+    /* Dark Theme Colors */
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #242424;
+    --bg-tertiary: #2d2d2d;
+    --accent-primary: #e63946;
+    --accent-secondary: #f86f6f;
+    --accent-tertiary: #fa7030;
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --text-muted: #a0a0a0;
+    --border-color: #3a3a3a;
+    --success-color: #4caf50;
+    --warning-color: #ff9800;
+    --info-color: #2196f3;
+    --danger-color: #f44336;
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --transition-speed: 0.3s;
+  }
+  
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+  }
+  
+  body.light-mode {
+    --bg-primary: #f5f5f5;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f0f0f0;
+    --text-primary: #333333;
+    --text-secondary: #555555;
+    --text-muted: #777777;
+    --border-color: #dddddd;
+    --card-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  a {
+    color: var(--accent-tertiary);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+  }
+  
+  a:hover {
+    color: var(--accent-secondary);
+  }
+  
+  button {
+    cursor: pointer;
+    font-family: inherit;
+  }
+  
+  /* App Container */
+  .app-container {
     display: flex;
-    justify-content: space-ev;
-    gap: 10vw;
-    width: 90%;
-    height: auto;
-    padding: 3vw;
-    margin-left: 5%;
-}
-.user-details>span{
-    font-size: 3vw;
-}
-.employment{
-    width: 90%;
-    height: auto;
-    padding: 3vw;
-    margin-left: 5%;
-}
+    min-height: 100vh;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 280px;
+    background-color: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-speed);
+    z-index: 1000;
+  }
+  
+  .sidebar-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .sidebar-header h2 {
+    color: var(--accent-primary);
+    font-size: 1.5rem;
+  }
+  
+  .close-sidebar {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+  }
+  
+  .sidebar-user {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-primary);
+  }
+  
+  .user-info {
+    margin-left: 15px;
+  }
+  
+  .user-info h3 {
+    font-size: 1rem;
+    margin-bottom: 4px;
+  }
+  
+  .user-role {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  
+  .sidebar-nav {
+    flex: 1;
+    padding: 20px 0;
+  }
+  
+  .nav-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: var(--text-secondary);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+  }
+  
+  .nav-item i {
+    width: 24px;
+    margin-right: 15px;
+    text-align: center;
+  }
+  
+  .nav-item:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+  }
+  
+  .nav-item.active {
+    background-color: var(--bg-tertiary);
+    color: var(--accent-primary);
+    border-left: 3px solid var(--accent-primary);
+  }
+  
+  .sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  /* Main Content */
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+  
+  .top-header {
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .menu-toggle {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    display: none;
+  }
+  
+  .header-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .theme-toggle,
+  .notifications-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    margin-left: 15px;
+    position: relative;
+  }
+  
+  .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--accent-primary);
+    color: white;
+    font-size: 0.7rem;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Profile Container */
+  .profile-container {
+    padding: 30px;
+    flex: 1;
+  }
+  
+  .page-title {
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+  }
+  
+  /* Salary Card */
+  .card-container {
+    margin-bottom: 30px;
+  }
+  
+  .salary-card {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+    border-radius: 12px;
+    padding: 25px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: var(--card-shadow);
+  }
+  
+  .salary-info {
+    flex: 1;
+  }
+  
+  .label {
+    display: block;
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 5px;
+  }
+  
+  .amount {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .salary-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .status {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-right: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .status.pending {
+    background-color: rgba(255, 193, 7, 0.3);
+  }
+  
+  .link-action {
+    color: white;
+    display: flex;
+    align-items: center;
+  }
+  
+  .link-action i {
+    margin-left: 5px;
+    font-size: 0.85rem;
+  }
+  
+  .card-visual {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  
+  .card-visual i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .card-number {
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+  
+  /* Profile Sections */
+  .profile-section {
+    margin-bottom: 30px;
+  }
+  
+  .section-header {
+    margin-bottom: 15px;
+  }
+  
+  .section-header h2 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+  }
+  
+  .profile-card {
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: var(--card-shadow);
+  }
+  
+  .profile-section-title {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    position: relative;
+    padding-bottom: 10px;
+  }
+  
+  .profile-section-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: var(--accent-primary);
+    border-radius: 3px;
+  }
+  
+  /* Profile Details */
+  .profile-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+  
+  .detail-group {
+    flex: 1;
+    min-width: 250px;
+  }
+  
+  .detail-item {
+    margin-bottom: 20px;
+  }
+  
+  .detail-label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+  }
+  
+  .detail-value {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+  }
+  
+  /* Employment Details */
+  .employment-details {
+    padding: 10px 0;
+  }
+  
+  .employment-position {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .position-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+  }
+  
+  .employment-date {
+    font-size: 1rem;
+    color: var(--info-color);
+  }
+  
+  /* Logout Button */
+  .logout-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  
+  .logout-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(to right, var(--accent-primary), var(--accent-tertiary));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  }
+  
+  .logout-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: white;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 992px) {
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      transform: translateX(-100%);
+    }
+  
+    .sidebar.active {
+      transform: translateX(0);
+    }
+  
+    .close-sidebar {
+      display: block;
+    }
+  
+    .menu-toggle {
+      display: block;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .profile-container {
+      padding: 20px 15px;
+    }
+  
+    .salary-card {
+      flex-direction: column;
+    }
+  
+    .card-visual {
+      align-items: flex-start;
+      margin-top: 15px;
+    }
+  
+    .profile-details {
+      flex-direction: column;
+      gap: 15px;
+    }
+  
+    .detail-group {
+      min-width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .salary-actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .status {
+      margin-bottom: 10px;
+    }
+  
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .amount {
+      font-size: 2rem;
+    }
+  
+    .page-title {
+      font-size: 1.5rem;
+    }
+  
+    .profile-section-title {
+      font-size: 1.1rem;
+    }
+  
+    .position-title {
+      font-size: 1.1rem;
+    }
+  
+    .employment-date {
+      font-size: 0.9rem;
+    }
+  }
+  
+  

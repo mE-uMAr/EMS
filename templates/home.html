@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {%load static%}
+    {% load static %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
-    <title>EMS-User</title>
-    <link rel="stylesheet" href="{% static "styles.css" %}"/>
+    <title>EMS Dashboard</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}"/>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -15,81 +15,190 @@
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap"
     />
   </head>
   <body id="body">
-    <div style="display: none" id="nav">
-      <nav>
-        <a href="/">Dashboard</a>
-        <a href="/payments">Payments</a>
-        <a href="/tasks">Tasks</a>
-        <a href="/profile">Profile details</a>
-      </nav>
-    </div>
-    <header>
-      <div class="username">
-        <img src="{% static "profile.jpg" %} " alt="" />
-        <h3>{{profile.username}}</h3>
-      </div>
-      <div class="profile">
-        <i id="bars" class="fa-solid fa-bars"></i>
-        <i id="mode-button" class="fa-solid fa-toggle-on"></i>
-      </div>
-    </header>
-    <hero>
-      <div class="hero-details">
-        <p>Total Salary</p>
-        <h1>$ {{salary}}</h1>
-        <button>Active</button>
-        <span style="cursor: pointer"
-          ><a href=""> Go to payments ></a></span
-        >
-      </div>
-      <div class="card">
-        <i
-          style="margin-left: 1em; margin-top: 1rem"
-          class="fa-brands fa-cc-mastercard"
-        ></i>
-        <p>** 7854</p>
-      </div>
-    </hero>
-    <div class="progress-container">
-      <span style="display: flex; margin: 2% 2%"
-        ><h4>Pending Tasks</h4>
-        <a href="/tasks">See All Tasks ></a></span
-      >
-      <div class="bar-box">
-        <p style="margin-left: 10%">{{pendingTask}}</p>
-        <div class="bar">
-          <div class="progress" style="width: {{per}}%"></div>
+    <div class="app-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <h2>EMS</h2>
+          <button class="close-sidebar" id="close-sidebar">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
-        <p style="margin-left: 10%; font-size: 2vw">{{pendingTask}} out of {{tasks}} remaining</p>
-      </div>
-    </div>
-    <div class="progress-container">
-      <span style="display: flex; margin: 2% 2%"
-        ><h4>Completed Tasks</h4>
-        <a href="/tasks">See All Tasks ></a></span
-      >
-      <div class="bar-box">
-        <p style="margin-left: 10%">{{tasks}}</p>
-        <div class="bar">
-          <div class="progress" style="width: {{per}}%"></div>
+        <div class="sidebar-user">
+          <img src="{% static 'profile.jpg' %}" alt="Profile" class="avatar" />
+          <div class="user-info">
+            <h3>{{profile.username}}</h3>
+            <span class="user-role">Employee</span>
+          </div>
         </div>
-        <p style="margin-left: 10%; font-size: 2vw">{{per}}% completion rate</p>
-      </div>
-    </div>
-    <div class="notifications">
-      <h4>Notifications</h4>
-      <br />
-      <p style="font-size: 3vw">
-        You have some remaining tasks <a href="/tasks">Go Finish them</a>
-      </p>
-      <br />
-      <p style="font-size: 3vw">Update your<a href="/profile">Profile know</a></p>
+        <nav class="sidebar-nav">
+          <a href="/" class="nav-item active">
+            <i class="fa-solid fa-gauge-high"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="/tasks" class="nav-item">
+            <i class="fa-solid fa-list-check"></i>
+            <span>Tasks</span>
+          </a>
+          <a href="/payments" class="nav-item">
+            <i class="fa-solid fa-credit-card"></i>
+            <span>Payments</span>
+          </a>
+          <a href="/profile" class="nav-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+          </a>
+        </nav>
+        <div class="sidebar-footer">
+          <a href="/logout" class="nav-item">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <header class="top-header">
+          <button class="menu-toggle" id="menu-toggle">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="header-actions">
+            <button class="theme-toggle" id="theme-toggle">
+              <i class="fa-solid fa-moon"></i>
+            </button>
+            <div class="notifications-dropdown">
+              <button class="notifications-btn">
+                <i class="fa-solid fa-bell"></i>
+                <span class="badge">2</span>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <div class="dashboard">
+          <h1 class="page-title">Dashboard</h1>
+          
+          <!-- Salary Card -->
+          <div class="card-container">
+            <div class="salary-card">
+              <div class="salary-info">
+                <span class="label">Total Salary</span>
+                <h2 class="amount">${{salary}}</h2>
+                <div class="salary-actions">
+                  <span class="status active">Active</span>
+                  <a href="/payments" class="link-action">
+                    View payments <i class="fa-solid fa-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="card-visual">
+                <i class="fa-brands fa-cc-mastercard"></i>
+                <span class="card-number">**** 7854</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Task Progress Section -->
+          <section class="task-section">
+            <div class="section-header">
+              <h2>Pending Tasks</h2>
+              <a href="/tasks" class="view-all">
+                See All Tasks <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+            
+            <div class="progress-card">
+              <div class="progress-header">
+                <h3>{{pendingTask}} Tasks Pending</h3>
+                <span class="progress-percentage">{{per}}%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: {{per}}%"></div>
+              </div>
+              <p class="progress-info">{{pendingTask}} out of {{tasks}} remaining</p>
+            </div>
+          </section>
+          
+          <!-- Completed Tasks Section -->
+          <section class="task-section">
+            <div class="section-header">
+              <h2>Completed Tasks</h2>
+              <a href="/tasks" class="view-all">
+                See All Tasks <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+            
+            <div class="progress-card">
+              <div class="progress-header">
+                <h3>{{tasks}} Total Tasks</h3>
+                <span class="progress-percentage">{{per}}%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: {{per}}%"></div>
+              </div>
+              <p class="progress-info">{{per}}% completion rate</p>
+            </div>
+          </section>
+          
+          <!-- Notifications Section -->
+          <section class="notifications-section">
+            <div class="section-header">
+              <h2>Notifications</h2>
+            </div>
+            
+            <div class="notifications-list">
+              <div class="notification-item">
+                <div class="notification-icon">
+                  <i class="fa-solid fa-tasks"></i>
+                </div>
+                <div class="notification-content">
+                  <p>You have some remaining tasks</p>
+                  <a href="/tasks">Go finish them <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+              </div>
+              
+              <div class="notification-item">
+                <div class="notification-icon">
+                  <i class="fa-solid fa-user-edit"></i>
+                </div>
+                <div class="notification-content">
+                  <p>Update your profile information</p>
+                  <a href="/profile">Update now <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
     </div>
 
-    <script src="{% static "script.js" %} "></script>
+    <script>
+      // Simple toggle functionality for sidebar
+      document.getElementById('menu-toggle').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.add('active');
+      });
+      
+      document.getElementById('close-sidebar').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.remove('active');
+      });
+      
+      // Theme toggle
+      document.getElementById('theme-toggle').addEventListener('click', function() {
+        document.body.classList.toggle('light-mode');
+        const icon = this.querySelector('i');
+        if (document.body.classList.contains('light-mode')) {
+          icon.classList.remove('fa-moon');
+          icon.classList.add('fa-sun');
+        } else {
+          icon.classList.remove('fa-sun');
+          icon.classList.add('fa-moon');
+        }
+      });
+    </script>
   </body>
 </html>

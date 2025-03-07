@@ -4,8 +4,9 @@
     {%load static%}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
-    <title>Payments</title>
-    <link rel="stylesheet" href="{% static "styles.css" %} " />
+    <title>EMS - Payments</title>
+    <link rel="stylesheet" href="{% static 'payments.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -15,68 +16,248 @@
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap"
     />
-    <link rel="stylesheet" href="{% static "payments.css" %}" />
   </head>
   <body id="body">
-    <div style="display: none" id="nav">
-      <nav>
-        <a href="/">Dashboard</a>
-        <a href="/payments">Payments</a>
-        <a href="/tasks">Tasks</a>
-        <a href="/profile">Profile details</a>
-      </nav>
+    <div class="app-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <h2>EMS</h2>
+          <button class="close-sidebar" id="close-sidebar">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="sidebar-user">
+          <img src="{%static 'profile.jpg'%}" alt="Profile" class="avatar" />
+          <div class="user-info">
+            <h3>{{profile.username}}</h3>
+            <span class="user-role">Employee</span>
+          </div>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="/" class="nav-item">
+            <i class="fa-solid fa-gauge-high"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="/tasks" class="nav-item">
+            <i class="fa-solid fa-list-check"></i>
+            <span>Tasks</span>
+          </a>
+          <a href="/payments" class="nav-item active">
+            <i class="fa-solid fa-credit-card"></i>
+            <span>Payments</span>
+          </a>
+          <a href="/profile" class="nav-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+          </a>
+        </nav>
+        <div class="sidebar-footer">
+          <a href="/logout" class="nav-item">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <header class="top-header">
+          <button class="menu-toggle" id="menu-toggle">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="header-actions">
+            <button class="theme-toggle" id="theme-toggle">
+              <i class="fa-solid fa-moon"></i>
+            </button>
+            <div class="notifications-dropdown">
+              <button class="notifications-btn">
+                <i class="fa-solid fa-bell"></i>
+                <span class="badge">2</span>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <div class="dashboard">
+          <h1 class="page-title">Payments</h1>
+          
+          <!-- Salary Card -->
+          <div class="card-container">
+            <div class="salary-card">
+              <div class="salary-info">
+                <span class="label">Total Salary</span>
+                <h2 class="amount">${{salary}}</h2>
+                <button class="btn-primary withdraw-btn">
+                  <i class="fa-solid fa-money-bill-transfer"></i> Withdraw
+                </button>
+              </div>
+              <div class="card-visual">
+                <div class="credit-card">
+                  <div class="credit-card-chip"></div>
+                  <i class="fa-brands fa-cc-mastercard"></i>
+                  <div class="credit-card-number">**** **** **** 7854</div>
+                  <div class="credit-card-name">{{profile.username}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Salary Details -->
+          <section class="salary-details-section">
+            <div class="section-header">
+              <h2>Salary Details</h2>
+            </div>
+            
+            <div class="salary-details-container">
+              <div class="salary-detail-card">
+                <div class="detail-icon">
+                  <i class="fa-solid fa-money-bill"></i>
+                </div>
+                <div class="detail-content">
+                  <h3>Basic Pay</h3>
+                  <p class="detail-amount">${{account.basic}}</p>
+                </div>
+              </div>
+              
+              <div class="salary-detail-card">
+                <div class="detail-icon">
+                  <i class="fa-solid fa-gift"></i>
+                </div>
+                <div class="detail-content">
+                  <h3>Bonuses</h3>
+                  <p class="detail-amount">${{account.bonus}}</p>
+                </div>
+              </div>
+              
+              <div class="salary-detail-card">
+                <div class="detail-icon">
+                  <i class="fa-solid fa-award"></i>
+                </div>
+                <div class="detail-content">
+                  <h3>Other Rewards</h3>
+                  <p class="detail-amount">${{account.reward}}</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          <!-- Transaction History -->
+          <section class="transaction-section">
+            <div class="section-header">
+              <h2>Transaction History</h2>
+            </div>
+            
+            <div class="transaction-container">
+              <div class="transaction-list">
+                <div class="transaction-item">
+                  <div class="transaction-icon">
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+                  <div class="transaction-content">
+                    <div class="transaction-details">
+                      <h4>Withdrawn to bank</h4>
+                      <span class="transaction-date">Mar 15, 2025</span>
+                    </div>
+                    <div class="transaction-amount">$60,000</div>
+                  </div>
+                </div>
+                
+                <div class="transaction-item">
+                  <div class="transaction-icon">
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+                  <div class="transaction-content">
+                    <div class="transaction-details">
+                      <h4>Withdrawn to bank</h4>
+                      <span class="transaction-date">Feb 28, 2025</span>
+                    </div>
+                    <div class="transaction-amount">$233,000</div>
+                  </div>
+                </div>
+                
+                <div class="transaction-item">
+                  <div class="transaction-icon">
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+                  <div class="transaction-content">
+                    <div class="transaction-details">
+                      <h4>Withdrawn to bank</h4>
+                      <span class="transaction-date">Jan 15, 2025</span>
+                    </div>
+                    <div class="transaction-amount">$60,000</div>
+                  </div>
+                </div>
+                
+                <div class="transaction-item">
+                  <div class="transaction-icon">
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+                  <div class="transaction-content">
+                    <div class="transaction-details">
+                      <h4>Withdrawn to bank</h4>
+                      <span class="transaction-date">Dec 30, 2024</span>
+                    </div>
+                    <div class="transaction-amount">$233,000</div>
+                  </div>
+                </div>
+                
+                <div class="transaction-item">
+                  <div class="transaction-icon">
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+                  <div class="transaction-content">
+                    <div class="transaction-details">
+                      <h4>Withdrawn to bank</h4>
+                      <span class="transaction-date">Nov 15, 2024</span>
+                    </div>
+                    <div class="transaction-amount">$60,000</div>
+                  </div>
+                </div>
+                
+                <div class="transaction-item">
+                  <div class="transaction-icon">
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </div>
+                  <div class="transaction-content">
+                    <div class="transaction-details">
+                      <h4>Withdrawn to bank</h4>
+                      <span class="transaction-date">Oct 30, 2024</span>
+                    </div>
+                    <div class="transaction-amount">$233,000</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
     </div>
 
-    <header>
-      <div class="username">
-        <img src="{%static "profile.jpg"%}" alt="" />
-        <h3>{{profile.username}}</h3>
-      </div>
-      <div class="profile">
-        <i id="bars" class="fa-solid fa-bars"></i>
-        <i id="mode-button" class="fa-solid fa-toggle-on"></i>
-      </div>
-    </header>
-    <div class="salary">
-      <div>
-        <h4>Total Salary</h4>
-        <p>$ {{salary}}</p>
-        <button class="witButton">Withdraw</button>
-      </div>
-      <div class="card">
-        <i
-          style="margin-left: 1em; margin-top: 1rem"
-          class="fa-brands fa-cc-mastercard"
-        ></i>
-        <p>** 7854</p>
-      </div>
-    </div>
-    <h3 style="margin: 0 0 -3vw 5vw">Slary Details</h3>
-    <div class="payment-details">
-      <div>
-        <h5>Basic pay:</h5>
-        <p>$ {{account.basic}}</p>
-      </div>
-      <div>
-        <h5>Bonuses:</h5>
-        <p>$ {{account.bonus}}</p>
-      </div>
-      <div>
-        <h5>Other Rewards:</h5>
-        <p>$ {{account.reward}}</p>
-      </div>
-    </div>
-    <div class="history">
-      <h3>History:</h3>
-      <p>
-        withdrawn to bank: $ 60,000 <br />withdrawn to bank: $ 233,000
-        <br />withdrawn to bank: $ 60,000 <br />withdrawn to bank: $ 233,000
-        <br />withdrawn to bank: $ 60,000 <br />withdrawn to bank: $ 233,000
-      </p>
-    </div>
-
-    <script src="{% static "script.js" %}"></script>
+    <script>
+      // Simple toggle functionality for sidebar
+      document.getElementById('menu-toggle').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.add('active');
+      });
+      
+      document.getElementById('close-sidebar').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.remove('active');
+      });
+      
+      // Theme toggle
+      document.getElementById('theme-toggle').addEventListener('click', function() {
+        document.body.classList.toggle('light-mode');
+        const icon = this.querySelector('i');
+        if (document.body.classList.contains('light-mode')) {
+          icon.classList.remove('fa-moon');
+          icon.classList.add('fa-sun');
+        } else {
+          icon.classList.remove('fa-sun');
+          icon.classList.add('fa-moon');
+        }
+      });
+    </script>
   </body>
 </html>

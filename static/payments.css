@@ -1,53 +1,332 @@
+/* Payments Page Specific Styles */
 
-.salary{
-    width: 90%;
-    height: auto;
-    padding: 2vw;
-    margin: 4vw 5%;
-    /* border: 2px solid #f85535; */
+/* Salary Card Section */
+.salary-card {
+    background: linear-gradient(135deg, #e63946, #fa7030);
+    border-radius: 12px;
+    padding: 25px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+  }
+  
+  .salary-info {
+    flex: 1;
+  }
+  
+  .salary-info .label {
+    display: block;
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 5px;
+  }
+  
+  .salary-info .amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  
+  .withdraw-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: linear-gradient(to right, #3d57eb, #61c1f8);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .withdraw-btn i {
+    margin-right: 8px;
+  }
+  
+  .withdraw-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .withdraw-btn:active {
+    transform: translateY(0);
+  }
+  
+  /* Credit Card */
+  .card-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .credit-card {
+    width: 280px;
+    height: 170px;
+    background: linear-gradient(135deg, #333, #111);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+  
+  .credit-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    border-radius: 12px;
+  }
+  
+  .credit-card-chip {
+    width: 40px;
+    height: 30px;
+    background: linear-gradient(135deg, #f5cf50, #fa7030);
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .credit-card i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .credit-card-number {
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+  }
+  
+  .credit-card-name {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+  
+  /* Salary Details Section */
+  .salary-details-section {
+    margin-bottom: 30px;
+  }
+  
+  .section-header {
+    margin-bottom: 20px;
+  }
+  
+  .section-header h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  
+  .salary-details-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .salary-detail-card {
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .salary-detail-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .detail-icon {
+    width: 50px;
+    height: 50px;
+    background-color: var(--accent-primary);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+  }
+  
+  .detail-icon i {
+    color: white;
+    font-size: 1.2rem;
+  }
+  
+  .detail-content {
+    flex: 1;
+  }
+  
+  .detail-content h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: var(--text-secondary);
+  }
+  
+  .detail-amount {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  /* Transaction Section */
+  .transaction-section {
+    margin-bottom: 30px;
+  }
+  
+  .transaction-container {
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .transaction-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .transaction-item {
+    display: flex;
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s ease;
+  }
+  
+  .transaction-item:hover {
+    background-color: var(--bg-tertiary);
+  }
+  
+  .transaction-item:last-child {
+    border-bottom: none;
+  }
+  
+  .transaction-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #2196f3;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+  }
+  
+  .transaction-icon i {
+    color: white;
+    font-size: 1rem;
+  }
+  
+  .transaction-content {
+    flex: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-.salary .card{
-    height: 20vw;
-    width: 30vw;
-    /* margin-top: 1em; */
-    margin-right: -1.75vw;
-    display: inline;
-    background-image: radial-gradient(#f5cf50,#fa7030 , #f83535);
-    border-top-left-radius: 4vw;
-    border-bottom-left-radius: 4vw;
-    overflow: hidden;
-}
-.salary .card p{
-    font-size: 2vw;
-    margin-top: 8vw;
-    margin-left: 1em;
-}
-.witButton{
-    background-image: linear-gradient(to left,#61c1f8fb, blue ,#61c1f8fb);
-    border: none;
-    border-radius: 5px;
-    height: 4vw;
-    width: 10vw;
-    color: white;
-    font-size: 2vw;
-}
-.payment-details{
-    width: 90%;
-    height: auto;
-    padding: 2vw;
-    margin: 4vw 5%;
-    /* border: 2px solid #f85535; */
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-.history{
-    width: 90%;
-    height: auto;
-    padding: 2vw;
-    margin: 10vw 5%;
-    /* border: 2px solid #f85535; */
-}
+  }
+  
+  .transaction-details h4 {
+    margin-bottom: 5px;
+    font-size: 1rem;
+  }
+  
+  .transaction-date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  
+  .transaction-amount {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  
+  /* Light Mode Adjustments */
+  body.light-mode .credit-card {
+    background: linear-gradient(135deg, #444, #222);
+  }
+  
+  body.light-mode .transaction-item:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 992px) {
+    .salary-card {
+      flex-direction: column;
+    }
+    
+    .card-visual {
+      margin-top: 25px;
+      width: 100%;
+    }
+    
+    .credit-card {
+      width: 100%;
+      max-width: 350px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .transaction-content {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .transaction-amount {
+      margin-top: 10px;
+    }
+    
+    .salary-details-container {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .salary-details-container {
+      grid-template-columns: 1fr;
+    }
+    
+    .amount {
+      font-size: 2rem;
+    }
+    
+    .credit-card {
+      height: 150px;
+    }
+    
+    .credit-card-chip {
+      width: 30px;
+      height: 25px;
+      margin-bottom: 15px;
+    }
+    
+    .credit-card i {
+      font-size: 1.5rem;
+    }
+    
+    .credit-card-number {
+      font-size: 1rem;
+    }
+    
+    .detail-icon {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .detail-icon i {
+      font-size: 1rem;
+    }
+    
+    .detail-amount {
+      font-size: 1.3rem;
+    }
+  }
