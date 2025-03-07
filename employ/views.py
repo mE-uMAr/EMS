@@ -62,9 +62,11 @@ def register(request):
         if password != confPassword :
             return redirect ("/signup")
         newUser = User.objects.create_user(username , email , password)
+        account = Accounts.objects.create(user=newUser, basic=0, bonus=0, reward=0)
+        profile = Profile.objects.create(user=newUser, employPost=addemp.post, employDate='2021-01-01')
         newUser.save()
-        account = Accounts(user=newUser, basic=0, bonus=0, reward=0)
-        profile = Profile(user=newUser, employPost=addemp.post, employDate='2021-01-01')
+        AddEmployee.objects.filter(code=code).delete()
+        login(request, newUser)
         messages.success(request , "new account created!")
         return redirect('/')
     
